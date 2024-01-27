@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdcblkx33hv7i"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_u84th"]
+[ext_resource type="PackedScene" uid="uid://dnmm0wtq2w363" path="res://assets/player/player.ase" id="2_d52v6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nho3y"]
+radius = 11.0
+height = 40.0
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_mask = 5
+script = ExtResource("1_u84th")
+
+[node name="playerSprites" parent="." instance=ExtResource("2_d52v6")]
+position = Vector2(65, 64)
+animation = &"run"
+frame_progress = 0.914504
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(68, 108)
+shape = SubResource("CapsuleShape2D_nho3y")
+
+[node name="followCam" type="Camera2D" parent="."]
+limit_left = -500
+limit_top = -200
+limit_right = 10000
+limit_bottom = 1000
+limit_smoothed = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_limits = true
