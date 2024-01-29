@@ -6,7 +6,10 @@ var coins =0
 func _ready():
 	$CoinsUI.text = str(coins)
 	GameManager.updateCoins.connect(update_coins_display)
+	GameManager.updateKeySignal.connect(update_key_display)
 
 func update_coins_display(val):
 	$CoinsUI.text = str(val)
-	
+
+func update_key_display(val):
+	$KeyUI.text = str(val)

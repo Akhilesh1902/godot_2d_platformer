@@ -41,9 +41,5 @@ func _on_fall_zone_body_entered(body):
 	#queue_free()
 	get_tree().change_scene_to_file.bind("res://Scenes/Level1.tscn").call_deferred()
 
-func add_coin(val):
-	coin +=1
-	get_tree()
-	
-func _on_door_body_entered(body):
-	print('win')
+func winning():
+	print('winning')
