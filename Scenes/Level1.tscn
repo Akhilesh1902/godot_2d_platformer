@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dn03tqo1mnbsv"]
+[gd_scene load_steps=23 format=3 uid="uid://dn03tqo1mnbsv"]
 
 [ext_resource type="PackedScene" uid="uid://cdcblkx33hv7i" path="res://Scenes/player.tscn" id="1_klwkx"]
 [ext_resource type="Texture2D" uid="uid://c0n08h3s5hga4" path="res://assets/tilemap/world.png" id="3_vs53b"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://722ny6opxijl" path="res://assets/items/coin.ase" id="10_or5m8"]
 [ext_resource type="Texture2D" uid="uid://hbnr0jr5whqp" path="res://assets/items/key.aseprite" id="12_jy18s"]
 [ext_resource type="PackedScene" uid="uid://bkmep4fsi15cq" path="res://Scenes/key.tscn" id="13_7n6wj"]
+[ext_resource type="PackedScene" uid="uid://70rppxqqchc0" path="res://assets/backgrounds/lamp.ase" id="15_7hr5t"]
+[ext_resource type="Texture2D" uid="uid://c6ci5pqtnknn7" path="res://assets/backgrounds/lamp.png" id="16_f7obx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_71mov"]
 texture = ExtResource("3_vs53b")
@@ -196,10 +198,40 @@ sources/0 = SubResource("TileSetAtlasSource_71mov")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3rtp6"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8j4s"]
+atlas = ExtResource("16_f7obx")
+region = Rect2(102, 0, 94, 128)
+margin = Rect2(20, 0, 34, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5uay"]
+atlas = ExtResource("16_f7obx")
+region = Rect2(0, 0, 102, 128)
+margin = Rect2(20, 0, 26, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pghdf"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_w8j4s")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_v5uay")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_v5uay")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_w8j4s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
 [node name="Level1" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_klwkx")]
-position = Vector2(3816, 544)
+position = Vector2(-168, 168)
 scale = Vector2(0.9, 0.9)
 collision_mask = 7
 
@@ -432,6 +464,45 @@ text = "0
 "
 
 [node name="key" parent="." instance=ExtResource("13_7n6wj")]
-position = Vector2(3424, 504)
+position = Vector2(3016, 248)
+
+[node name="lamps" type="Node" parent="."]
+
+[node name="lamp" parent="lamps" instance=ExtResource("15_7hr5t")]
+position = Vector2(120, 416)
+autoplay = "default"
+frame_progress = 0.244657
+
+[node name="lamp2" parent="lamps" instance=ExtResource("15_7hr5t")]
+position = Vector2(616, 416)
+sprite_frames = SubResource("SpriteFrames_pghdf")
+autoplay = "default"
+frame_progress = 0.244657
+flip_h = true
+
+[node name="lamp3" parent="lamps" instance=ExtResource("15_7hr5t")]
+position = Vector2(1304, 512)
+sprite_frames = SubResource("SpriteFrames_pghdf")
+autoplay = "default"
+frame_progress = 0.244657
+
+[node name="lamp4" parent="lamps" instance=ExtResource("15_7hr5t")]
+position = Vector2(1648, 832)
+sprite_frames = SubResource("SpriteFrames_pghdf")
+autoplay = "default"
+frame_progress = 0.244657
+
+[node name="lamp5" parent="lamps" instance=ExtResource("15_7hr5t")]
+position = Vector2(2744, 672)
+sprite_frames = SubResource("SpriteFrames_pghdf")
+autoplay = "default"
+frame_progress = 0.244657
+
+[node name="lamp6" parent="lamps" instance=ExtResource("15_7hr5t")]
+position = Vector2(3760, 672)
+sprite_frames = SubResource("SpriteFrames_pghdf")
+autoplay = "default"
+frame_progress = 0.244657
+flip_h = true
 
 [connection signal="body_entered" from="FallZone" to="Player" method="_on_fall_zone_body_entered"]
