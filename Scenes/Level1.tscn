@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dn03tqo1mnbsv"]
+[gd_scene load_steps=24 format=3 uid="uid://dn03tqo1mnbsv"]
 
 [ext_resource type="PackedScene" uid="uid://cdcblkx33hv7i" path="res://Scenes/player.tscn" id="1_klwkx"]
 [ext_resource type="Texture2D" uid="uid://c0n08h3s5hga4" path="res://assets/tilemap/world.png" id="3_vs53b"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bkmep4fsi15cq" path="res://Scenes/key.tscn" id="13_7n6wj"]
 [ext_resource type="PackedScene" uid="uid://70rppxqqchc0" path="res://assets/backgrounds/lamp.ase" id="15_7hr5t"]
 [ext_resource type="Texture2D" uid="uid://c6ci5pqtnknn7" path="res://assets/backgrounds/lamp.png" id="16_f7obx"]
+[ext_resource type="PackedScene" uid="uid://bcuv7e12a5xsj" path="res://Scenes/Golem.tscn" id="17_qyk0e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_71mov"]
 texture = ExtResource("3_vs53b")
@@ -193,7 +194,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_yxnoe"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_71mov")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3rtp6"]
@@ -504,5 +505,8 @@ sprite_frames = SubResource("SpriteFrames_pghdf")
 autoplay = "default"
 frame_progress = 0.244657
 flip_h = true
+
+[node name="Golem" parent="." instance=ExtResource("17_qyk0e")]
+position = Vector2(832, 280)
 
 [connection signal="body_entered" from="FallZone" to="Player" method="_on_fall_zone_body_entered"]

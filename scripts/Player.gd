@@ -1,38 +1,67 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -800.0
-const gravity =30
+const SPEED = 500.0
+const JUMP_VELOCITY = -2000.0
+const gravity =120
+const acceleration  = 50
+const friction = 70
+const max_jump= 2
+var currentJump = 1
+
 var coin = 0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func input() -> Vector2:
+	var input_dir = Vector2.ZERO
+	input_dir.x = Input.get_axis("left","right")
+	input_dir.normalized()
+	return input_dir
 
-func _physics_process(_delta):
-	
-	velocity.x = 0
-	
-	if Input.is_action_pressed("left"):
-		velocity.x -= SPEED
-		$playerSprites.flip_h = true
-		$playerSprites.play('run')
-		
-	elif Input.is_action_pressed("right"):
-		velocity.x += SPEED
-		$playerSprites.flip_h = false
-		$playerSprites.play('run')
-	else:
-		$playerSprites.play('idle')
-	if Input.is_action_just_pressed("jump") && is_on_floor():
-		velocity.y += JUMP_VELOCITY
-	
+func accelerate(direction):
+	velocity = velocity.move_toward(SPEED*direction,acceleration)
+
+func add_friction():
+	velocity = velocity.move_toward(Vector2.ZERO,friction)
+
+func player_movement():
+	move_and_slide()
+
+func jump():
+	if Input.is_action_just_pressed("jump"):
+		if currentJump < max_jump:
+			velocity.y = JUMP_VELOCITY
+			currentJump += 1
 	else:
 		velocity.y += gravity
-	if(velocity.y < 0):
-		$playerSprites.play('jump')
+	
+	if is_on_floor():
+		currentJump =1
+	
+func _physics_process(_delta):
+	
+	var input_dir: Vector2 = input()
+	
+	if input_dir != Vector2.ZERO:
+		accelerate(input_dir)
+		if(input_dir.x <0):
+			$playerSprites.flip_h= true
+		else:
+			$playerSprites.flip_h= false
+			
+			
+		$playerSprites.play('run')
+	else:
+		add_friction()
+		$playerSprites.play('idle')
+		
+		
+	jump()
 
-	move_and_slide()
+	player_movement()
+
+	
 	
 
 

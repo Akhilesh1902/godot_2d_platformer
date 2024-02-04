@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcuv7e12a5xsj"]
+
+[ext_resource type="Script" path="res://scripts/golem.gd" id="1_h4vgx"]
+[ext_resource type="PackedScene" uid="uid://4da22krc32po" path="res://assets/enemies/Golem.ase" id="2_f5lpr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ce05"]
+size = Vector2(32, 32)
+
+[node name="Golem" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_h4vgx")
+
+[node name="Golem" parent="." instance=ExtResource("2_f5lpr")]
+animation = &"run"
+frame_progress = 0.50089
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2ce05")
+
+[node name="leftEdge" type="RayCast2D" parent="."]
+position = Vector2(24, 0)
+target_position = Vector2(0, 30)
+collision_mask = 2
+
+[node name="rightEdge" type="RayCast2D" parent="."]
+position = Vector2(-24, 0)
+target_position = Vector2(0, 30)
+collision_mask = 2
+
+[node name="floorChecker" type="RayCast2D" parent="."]
+position = Vector2(24, 0)
+target_position = Vector2(0, 30)
+collision_mask = 2
